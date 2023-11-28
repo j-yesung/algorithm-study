@@ -1,4 +1,5 @@
 /**
+ * [문제 설명]
  * 한국중학교에 다니는 학생들은 각자 정수 번호를 갖고 있습니다.
  * 이 학교 학생 3명의 정수 번호를 더했을 때 0이 되면 3명의 학생은 삼총사라고 합니다.
  * 예를 들어, 5명의 학생이 있고, 각각의 정수 번호가 순서대로 -2, 3, 0, 2, -5일 때,
@@ -19,8 +20,22 @@
  * [-3, -2, -1, 0, 1, 2, 3]	5
  * [-1, 1, -1, 1]	          0
  */
+function solution(number) {
+  const LEN = number.length;
+  let answer = 0;
 
-function solution(number) {}
+  for (let i = 0; i < LEN - 2; i++) {
+    for (let j = i + 1; j < LEN - 1; j++) {
+      for (let k = j + 1; k < LEN; k++) {
+        console.log('number[i] + number[j] + number[k]: ', number[i], number[j], number[k]);
+        if (number[i] + number[j] + number[k] === 0) {
+          answer++;
+        }
+      }
+    }
+  }
+  return answer;
+}
 
 console.log(solution([-2, 3, 0, 2, -5]));
 // console.log(solution([-3, -2, -1, 0, 1, 2, 3]));

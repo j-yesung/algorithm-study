@@ -18,9 +18,12 @@ function solution(brown, yellow) {
   const size = brown + yellow;
   const result = [];
 
+  // 3부터 시작하는 이유는 가로, 세로의 최소 길이가 3이기 때문
   for (let y = 3; y <= size / y; y++) {
-    let x = Math.floor(size / y);
+    let x = Math.floor(size / y); // 최소 가로 길이
 
+    // -2는 노란색 양쪽 갈색 테두리를 빼기 위함
+    // yellow를 찾으면 x, y를 result에 push하고 반복문 종료
     if ((x - 2) * (y - 2) === yellow) {
       result.push(x);
       result.push(y);

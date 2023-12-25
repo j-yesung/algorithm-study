@@ -17,44 +17,30 @@
  */
 
 function solution(babbling) {
-  const words = ['aya', 'ye', 'woo', 'ma'];
-  let result = 0;
+  const can = ['aya', 'ye', 'woo', 'ma'];
+  let count = 0;
 
-  babbling.forEach(word => {
-    let status = true;
-    let prevWord = '';
+  for (let i = 0; i < babbling.length; i++) {
+    let babble = babbling[i];
 
-    while (status) {
-      for (let i = 0; i < words.length; i++) {
-        // 단어 맨 앞이 일치하는 경우
-        if (word.indexOf(words[i]) === 0) {
-          // 일치해도 연속되는 경우
-          if (prevWord !== words[i]) {
-            // 맨 앞 단어를 이전 단어로 저장
-            prevWord = words[i];
-            // 비교하는 단어 중 words에 포함하는 부분만 제거하고 저장
-            word = word.slice(words[i].length);
-            break;
-          } else {
-            status = false;
-            break;
-          }
-        }
-
-        // 네 가지 발음 중 마지막 단어까지 일치하지 않은 경우
-        if (i === words.length - 1) {
-          status = false;
-          break;
-        }
+    for (let j = 0; j < can.length; j++) {
+      // 연속되는 발음은 할 수 없음
+      if (babble.includes(can[j].repeat(2))) {
+        break;
       }
-      // 단어가 빈 문자열이 되면 반복문 종료
-      if (word.length === 0) {
-        result++;
-        status = false;
-      }
+
+      // 네 가지 발음 중 일치하다면
+      // 검사한 문자는 지우고 오타 방지를 위해 join(' ')으로 공백으로 바꿔줌
+      babble = babble.split(can[j]).join(' ');
     }
-  });
-  return result;
+
+    // 전부 검사했으면 빈 배열 빈 문자열로 바꿔줌
+    if (babble.split(' ').join('').length === 0) {
+      count += 1;
+    }
+  }
+
+  return count;
 }
 // console.log(solution(['aya', 'yee', 'u', 'maa']));
-console.log(solution(['ayaye', 'uuu', 'yeye', 'yemawoo', 'ayaayaa'])); // 2
+// console.log(solution(['ayaye', 'uuu', 'yeye', 'yemawoo', 'ayaayaa'])); // 2

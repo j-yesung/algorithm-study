@@ -30,4 +30,12 @@ function solution(bridge_length, weight, truck_weights) {
 
   return answer;
 }
-console.log(solution(2, 10, [7, 4, 5, 6])); // 8
+// console.log(solution(2, 10, [7, 4, 5, 6])); // 8
+
+const arr = [1, 2, 3, 4, 5];
+const length = arr.length;
+
+for (let i = 0; i < length; i++) {
+  const currentIndex = i % length;
+  console.log(arr[currentIndex]);
+}

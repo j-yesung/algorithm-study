@@ -41,7 +41,8 @@ function solution(genres, plays) {
   let sortedGenres = Array.from(map.entries()).sort((a, b) => b[1].total - a[1].total);
 
   // 3. 각 장르별로 노래를 재생 횟수와 고유 번호 기준으로 정렬하고, 상위 2개의 고유 번호를 결과 배열에 추가
-  sortedGenres.forEach(([genre, { songs }]) => {
+  sortedGenres.forEach(([_, { songs }]) => {
+    console.log('songs: ', songs);
     songs.sort((a, b) => b.plays - a.plays || a.id - b.id); // 재생 횟수가 같으면 고유 번호 기준으로 오름차순 정렬
     songs.slice(0, 2).forEach(song => answer.push(song.id)); // 상위 2개의 고유 번호 추가
   });

@@ -55,4 +55,21 @@ function solution(keymap, targets) {
 
   return answer;
 }
-console.log(solution(['ABACD', 'BCEFD'], ['ABCD', 'AABB']));
+
+function solution(ingredient) {
+  let count = 0;
+  let temp = [];
+
+  for (let i = 0; i < ingredient.length; i++) {
+    temp.push(ingredient[i]);
+
+    if (temp.slice(-4).join('') == '1231') {
+      count += 1;
+
+      temp.splice(-4);
+    }
+  }
+
+  return count;
+}
+console.log(solution([2, 1, 1, 2, 3, 1, 2, 3, 1]));

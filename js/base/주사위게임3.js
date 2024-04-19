@@ -25,21 +25,26 @@ function solution(a, b, c, d) {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
   }, {});
+  console.log('counts: ', counts);
 
   const keys = Object.keys(counts).map(x => parseInt(x));
   const vals = Object.values(counts);
 
+  // 네 주사위에서 나온 숫자가 모두 p로 같다면 1111 × p점을 얻습니다.
   if (vals.includes(4)) {
     return 1111 * keys[0];
   }
+  // 세 주사위에서 나온 숫자가 p로 같고 나머지 다른 주사위에서 나온 숫자가 q(p ≠ q)라면 (10 × p + q)2 점을 얻습니다.
   if (vals.includes(3)) {
     const p = keys[vals.indexOf(3)];
     const q = keys[vals.indexOf(1)];
     return (10 * p + q) ** 2;
   }
+  // 주사위가 두 개씩 같은 값이 나오고, 나온 숫자를 각각 p, q(p ≠ q)라고 한다면 (p + q) × |p - q|점을 얻습니다.
   if (vals.includes(2) && vals.length === 2) {
     return (keys[0] + keys[1]) * Math.abs(keys[0] - keys[1]);
   }
+  // 어느 두 주사위에서 나온 숫자가 p로 같고 나머지 두 주사위에서 나온 숫자가 각각 p와 다른 q, r(q ≠ r)이라면 q × r점을 얻습니다.
   if (vals.includes(2) && vals.length === 3) {
     const index = vals.indexOf(2);
     return keys[(index + 1) % 3] * keys[(index + 2) % 3];
